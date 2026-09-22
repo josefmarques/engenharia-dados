@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:17
+    container_name: postgres-local
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mrq831028
+      POSTGRES_USER: zemarques
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: America/Sao_Paulo
+    command:
+      - "postgres"
+      - "-c"
+      - "timezone=America/Sao_Paulo"
+    volumes:
+      - postgres_data_local:/var/lib/postgresql/data
+      - ./init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-zemarques}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - eng-dados-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-local
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      TZ: America/Sao_Paulo
+    ports:
+      - "5050:80"
+    networks:
+      - eng-dados-network
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  eng-dados-network:
+    driver: bridge
+
+volumes:
+  postgres_data_local:
