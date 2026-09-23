@@ -1,0 +1,16 @@
+{
+ "argv": [
+  "/home/zemarques/engenharia-dados/venv/bin/python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ],
+ "display_name": "Python (engenharia-dados/venv)",
+ "language": "python",
+ "metadata": {
+  "debugger": true,
+  "supported_encryption": "curve"
+ },
+ "kernel_protocol_version": "5.5"
+}
