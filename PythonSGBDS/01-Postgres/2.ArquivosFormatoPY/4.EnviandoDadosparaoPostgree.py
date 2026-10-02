@@ -3,7 +3,7 @@ import pandas as pd
 import psycopg2
 
 # %%
-caminho_do_arquivo = r"C:\Users\edmil\OneDrive\Documentos\Cursos\Python - SGBDS - Arquivos\Origem de dados\V_OCORRENCIA_AMPLA.json"
+caminho_do_arquivo = r"/home/zemarques/engenharia-dados/PythonSGBDS/08.MongoDB/02-ArquivosJson/V_OCORRENCIA_AMPLA.json"
 df = pd.read_json(caminho_do_arquivo, encoding='utf-8-sig')
 
 # %%
@@ -14,8 +14,8 @@ df.rename( columns={  'Classificacao_da_Ocorrência' : 'Classificacao_da_Ocorren
 # %%
 # Parâmetros de conexão
 dbname   = 'python'
-user     = 'postgres'
-password = '12345'
+user     = 'zemarques'
+password = 'mrq831028'
 host     = 'localhost'
 port     = '5432' 
 
